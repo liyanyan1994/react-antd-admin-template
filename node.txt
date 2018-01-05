@@ -1,0 +1,77 @@
+1.初始化项目
+    create-react-app react-antd-admin
+    里面自带react-dom的路由
+2.引入antd库 
+    npm install antd --save
+    App.css下引入 import '~antd/dist/antd.css'
+    组件中引入需要的组件 import {Button} from 'antd'
+
+3.支持sass 
+    https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc
+    npm install --save node-sass-chokidar
+    npm install --save npm-run-all
+    修改package.json文件
+    "scripts": {
+        "build-css": "node-sass-chokidar src/ -o src/",
+        "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+        "start-js": "react-scripts start",
+        "start": "npm-run-all -p watch-css start-js",
+        "build-js": "react-scripts build",
+        "build": "npm-run-all build-css build-js",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject"
+    },
+
+    安装npm install sass-loader node-sass --save-dev
+    在node_moudles下的react-scripts/config/webpack.config.dev.js修改文件
+
+4.根据路由进行页面布局 
+  npm install react-router-dom --save  // router用的V4但是自己不会配置 决定换成react-routerV2.8.1
+
+  npm install --save react-router@2.8.1
+  npm install --save react@15.6.1
+  npm install --save react-dom@15.6.1
+  npm install  react-dom@latest -S 更新到最新模块
+
+  由于antd支持react16.2路由还是不能更换 决定用4.X
+
+    export default class Routers extends React.Component {
+        render(){
+            return(
+                <Router>
+                    <Switch>
+                        <Route exact path="/login" component={Login} />
+                        <Redirect exact  path="/" to="/login"/>  //重定向到登录页面
+                        <Route component={Layout} />  // 使用此方法嵌套子路由
+                        <Route path="*" component={NoMatch} />
+                    </Switch>
+                </Router>
+            )
+        }
+    }
+    export const childRoutes = [
+        {
+            path: '/home',
+            component: Home,
+            exactly: true
+        },
+        {
+            path: '/page2',
+            component: Page2
+        }
+    ]
+    LayOut内部路由
+    {childRoutes.map((route, index) => (
+        <Route
+            key={index}
+            path={route.path}
+            component={route.component}
+            exact={route.exactly}
+        />
+    ))}
+
+
+
+错误Log
+A <Router> may have only one child element 
+Router下只能有一个router 用div包裹所有的route就可以了
