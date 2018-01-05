@@ -29,11 +29,11 @@
 
 ## 使用项目
 
-1.克隆项目   git clone https://github.com/liyanyan1994/react-antd-admin-template.git
-2.切换到项目根目录 cd  react-antd-admin-template
-3.安装依赖包 npm install
-4.启动服务 npm run dev
-5.打包构建 npm run build 
+- 1.克隆项目   git clone https://github.com/liyanyan1994/react-antd-admin-template.git
+- 2.切换到项目根目录 cd  react-antd-admin-template
+- 3.安装依赖包 npm install
+- 4.启动服务 npm run dev
+- 5.打包构建 npm run build 
 
 
 
