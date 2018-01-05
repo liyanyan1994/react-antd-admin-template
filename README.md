@@ -9,10 +9,11 @@
     最近很闲,开始学习react，在github上找了好久没有发现使用最新的react-router V4.X以上的后台管理系统，相对于V2.x的变化还是很大的。
     之前在公司都是使用的vue的全家桶,用react上手也很快,决定自己来写一个模板。
 
-    本项目是基于React的脚手架crate-react-app,增加了sass,具体可以参考(https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc)
+    本项目是基于React的脚手架crate-react-app,增加了sass,具体可以参考
+[地址](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc)
 
-    react-router使用的最新的4.2刚开始看着很抠脚，还研究了半天，里面还有一些坑，比如Router只能有一个子组件
-    
+    react-router使用的最新的4.2刚开始看着很抠脚，还研究了半天，里面还有一些坑。
+
     项目还在初级阶段，后续我会陆续的更新。。。。加油哦
 
 
