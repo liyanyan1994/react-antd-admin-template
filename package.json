@@ -5,6 +5,7 @@
   "author": "liyanyan1994 <15719493082@163.com>",
   "private": true,
   "dependencies": {
+    "echarts": "^3.8.5",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.2",
     "react": "^16.2.0",
