@@ -3,3 +3,7 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.ant-layout.ant-layout-has-sider{
+    height: 100%;
+}
