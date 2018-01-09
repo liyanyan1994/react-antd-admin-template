@@ -75,3 +75,15 @@
 错误Log
 A <Router> may have only one child element 
 Router下只能有一个router 用div包裹所有的route就可以了
+
+5.使用echarts组件 F5刷新的时候图像会溢出  (感觉和路由有关系)
+
+6.父子组件之间的传值
+
+7.子组件的事件里面，需要绑定一个this或者使用箭头函数
+    <div className="childCompoents" onClick={this.handleSetLineChartData.bind(this,'newVisitis')}></div>
+    <div className="childCompoents" onClick={(e) => this.handleSetLineChartData(id,e)}></div>
+为什么不能使用
+    在构造函数中绑定一个事件
+    this.handleSetLineChartData = this.handleSetLineChartData.bind(this)
+     <div className="childCompoents" onClick={this.handleSetLineChartData('newVisitis')}></div>

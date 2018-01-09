@@ -6,16 +6,23 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 
+let myLineChart = null
 export default class LineChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      expectedData: [100, 120, 161, 134, 105, 160, 165],
-      actualData: [120, 82, 91, 154, 162, 140, 145]
+      expectedData: props.chartData.expectedData,
+      actualData: props.chartData.actualData
     }
   }
-  componentDidMount() {
-    var myLineChart = echarts.init(document.getElementById('chartId'))
+  componentWillReceiveProps(nextProps) {
+    this.setChartOption({ ...nextProps.chartData })
+  }
+  initChart() {
+    myLineChart = echarts.init(document.getElementById('chartId'))
+    this.setChartOption()
+  }
+  setChartOption({ expectedData, actualData } = this.state) {
     myLineChart.setOption({
       xAxis: {
         data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -60,7 +67,7 @@ export default class LineChart extends React.Component {
           },
           smooth: true,
           type: 'line',
-          data: this.state.expectedData,
+          data: expectedData,
           animationDuration: 2800,
           animationEasing: 'cubicInOut'
         },
@@ -80,19 +87,21 @@ export default class LineChart extends React.Component {
               }
             }
           },
-          data: this.state.actualData,
+          data: actualData,
           animationDuration: 2800,
           animationEasing: 'quadraticOut'
         }
       ]
     })
   }
+  componentDidMount() {
+    this.initChart()
+  }
+  componentWillUnmount() {
+    myLineChart.dispose()
+    myLineChart = null
+  }
   render() {
-    return (
-      <div
-        id="chartId"
-        style={{ width: '100%', height: '350px', border: '1px solid red' }}
-      />
-    )
+    return <div id="chartId" style={{ width: '100%', height: '350px' }} />
   }
 }

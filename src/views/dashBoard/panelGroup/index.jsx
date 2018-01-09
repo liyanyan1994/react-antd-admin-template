@@ -3,14 +3,21 @@ import { Row, Col, Card } from 'antd'
 
 import './index.css'
 
-export default class PanelGroup extends React.Component {
+class PanelGroup extends React.Component {
+  handleSetLineChartData(type,e) {
+    e.preventDefault();
+    this.props.handleSetLineChartData(type)
+  }
   render() {
     return (
       <Row gutter={32}>
         <Col span="6" className="card-panel-col">
           <Card className="card-panel">
             <div className="card-panel-icon-wrapper">
-              <i className="icon iconfont icon-people card-panel-icon" />
+              <i
+                className="icon iconfont icon-people card-panel-icon"
+                onClick={this.handleSetLineChartData.bind(this,'newVisitis')}
+              />
             </div>
             <div className="card-panel-description">
               <div className="card-panel-text">New Lists</div>
@@ -21,7 +28,10 @@ export default class PanelGroup extends React.Component {
         <Col span="6" className="card-panel-col">
           <Card className="card-panel">
             <div className="card-panel-icon-wrapper">
-              <i className="icon iconfont icon-messagex card-panel-icon" />
+              <i
+                className="icon iconfont icon-messagex card-panel-icon"
+                onClick={this.handleSetLineChartData.bind(this,'messages')}
+              />
             </div>
             <div className="card-panel-description">
               <div className="card-panel-text">Messages</div>
@@ -32,7 +42,10 @@ export default class PanelGroup extends React.Component {
         <Col span="6" className="card-panel-col">
           <Card className="card-panel">
             <div className="card-panel-icon-wrapper">
-              <i className="icon iconfont icon-qian card-panel-icon" />
+              <i
+                className="icon iconfont icon-qian card-panel-icon"
+                onClick={this.handleSetLineChartData.bind(this,'purchases')}
+              />
             </div>
             <div className="card-panel-description">
               <div className="card-panel-text">Purchase</div>
@@ -43,7 +56,10 @@ export default class PanelGroup extends React.Component {
         <Col span="6" className="card-panel-col">
           <Card className="card-panel">
             <div className="card-panel-icon-wrapper">
-              <i className="icon iconfont icon-gouwuche card-panel-icon" />
+              <i
+                className="icon iconfont icon-gouwuche card-panel-icon"
+                onClick={this.handleSetLineChartData.bind(this,'shoppings')}
+              />
             </div>
             <div className="card-panel-description">
               <div className="card-panel-text">shoppings</div>
@@ -55,3 +71,5 @@ export default class PanelGroup extends React.Component {
     )
   }
 }
+
+export default PanelGroup
