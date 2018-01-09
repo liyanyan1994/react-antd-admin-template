@@ -31,7 +31,7 @@ class App extends Component {
               callbackParent={this.onCheckedChange}
             />
           </Header>
-          <Content style={{ margin: '0 16px' }}>
+          <Content style={{ margin: '32px' }}>
             <div style={{ minHeight: 460 }}>
               {childRoutes.map((route, index) => (
                 <Route
