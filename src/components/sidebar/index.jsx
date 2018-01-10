@@ -8,7 +8,7 @@ const SubMenu = Menu.SubMenu
 const list = [
   {
     key: '0',
-    name: 'DarshBord',
+    name: '首页',
     icon: 'laptop',
     url: '/dashboard'
   },

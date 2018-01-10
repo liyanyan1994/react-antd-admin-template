@@ -70,11 +70,15 @@
         />
     ))}
 
-
-
 错误Log
 A <Router> may have only one child element 
 Router下只能有一个router 用div包裹所有的route就可以了
+
+8.进行form登录退出操作。
+    this.props.history.push('/dashboard')
+    在首页的子组件中获取不到this.props.history 需要使用withRouter高阶组件组件
+    参考：https://segmentfault.com/q/1010000009928693/a-1020000009928978
+
 
 5.使用echarts组件 F5刷新的时候图像会溢出  (感觉和路由有关系)
 
@@ -87,3 +91,5 @@ Router下只能有一个router 用div包裹所有的route就可以了
     在构造函数中绑定一个事件
     this.handleSetLineChartData = this.handleSetLineChartData.bind(this)
      <div className="childCompoents" onClick={this.handleSetLineChartData('newVisitis')}></div>
+
+9.动态生成面包屑导航栏

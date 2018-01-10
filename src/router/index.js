@@ -49,7 +49,7 @@ export default class Routers extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/login" component={Login} />
-          <Redirect exact path="/" to="/home" />
+          <Redirect exact path="/" to="/login" />
           <Route component={Layout} />
           <Route path="*" component={NoMatch} />
         </Switch>
