@@ -1,58 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { childRoutes } from '../../router/index'
 
 import { Layout, Menu, Icon } from 'antd'
 const { Sider } = Layout
 const SubMenu = Menu.SubMenu
-
-const list = [
-  {
-    key: '0',
-    name: '首页',
-    icon: 'laptop',
-    url: '/dashboard'
-  },
-  {
-    key: 'sub1',
-    name: 'Components',
-    icon: 'user',
-    child: [
-      {
-        key: '1',
-        name: 'Card',
-        url: '/card'
-      },
-      {
-        key: '2',
-        name: 'Table',
-        url: '/table'
-      }
-    ]
-  },
-  {
-    key: '3',
-    name: 'Page2',
-    icon: 'file',
-    url: '/page2'
-  },
-  {
-    key: 'sub3',
-    name: 'Team',
-    icon: 'team',
-    child: [
-      {
-        key: '4',
-        name: 'team1',
-        url: '/team1'
-      },
-      {
-        key: '5',
-        name: 'team2',
-        url: '/team2'
-      }
-    ]
-  }
-]
 
 class SiderBar extends Component {
   constructor(props) {
@@ -112,7 +64,7 @@ class SiderBar extends Component {
         })
       )
     }
-    const menu = _menuProcess(list)
+    const menu = _menuProcess(childRoutes)
     return (
       <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
         <Menu theme="dark" mode={this.state.mode} defaultSelectedKeys={['0']}>

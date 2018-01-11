@@ -1,7 +1,8 @@
-import React from 'react'
 import './index.css'
+import React from 'react'
 import { Breadcrumb, Icon, Dropdown, Menu, Avatar } from 'antd'
-import { Link, withRouter, } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import { breadcrumbNameMap } from '../../router/index'
 
 class NavPath extends React.Component {
   constructor(props) {
@@ -12,24 +13,30 @@ class NavPath extends React.Component {
     this.toggle = this.toggle.bind(this) //必须要绑定this
     this.handleLoginOut = this.handleLoginOut.bind(this)
   }
-  componentDidMount(){
-    console.log('----navpath-----')
-  }
-  componentWillReceiveProps(){
-    console.log('----componentWillReceiveProps-----')
-    console.log(this.props.history.location.pathname)
-  }
   toggle() {
     const newState = !this.state.collapsed
     this.setState({ collapsed: newState })
     this.props.callbackParent(newState) //子组件调用父组件的callbackParent函数，传递新值到父组件
   }
-  handleLoginOut = () =>{
+  handleLoginOut = () => {
     console.log('loginout')
     console.log(this.props.router)
     this.props.history.replace('/login')
   }
   render() {
+    const { location } = this.props
+    const pathSnippets = location.pathname.split('/').filter(i => i)
+    const extreaBreadcrumbItems = pathSnippets.map((_, index) => {
+      const url = `/${pathSnippets.slice(0, index + 1).join('/')}`
+      return (
+        <Breadcrumb.Item key={url}>
+          {
+            index === 0 ? breadcrumbNameMap[url]: (<Link to={url}>{breadcrumbNameMap[url]}</Link>)
+          }
+        </Breadcrumb.Item>
+      )
+    })
+
     const menu = (
       <Menu>
         <Menu.Item key="1">
@@ -44,7 +51,8 @@ class NavPath extends React.Component {
             项目地址
           </a>
         </Menu.Item>
-        <Menu.Item key="3" >
+        <Menu.Divider />
+        <Menu.Item key="3">
           <a onClick={this.handleLoginOut}>退出登录</a>
         </Menu.Item>
       </Menu>
@@ -57,8 +65,7 @@ class NavPath extends React.Component {
           onClick={this.toggle}
         />
         <Breadcrumb style={{ margin: '24px 16px 0', display: 'inline-block' }}>
-          <Breadcrumb.Item>User</Breadcrumb.Item>
-          <Breadcrumb.Item>Bill</Breadcrumb.Item>
+          {extreaBreadcrumbItems}
         </Breadcrumb>
         <div className="drop-down">
           <Dropdown overlay={menu}>

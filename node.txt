@@ -93,3 +93,4 @@ Router下只能有一个router 用div包裹所有的route就可以了
      <div className="childCompoents" onClick={this.handleSetLineChartData('newVisitis')}></div>
 
 9.动态生成面包屑导航栏
+    参照antd官网例子https://ant.design/components/breadcrumb-cn/

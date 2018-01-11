@@ -14,7 +14,7 @@ class App extends Component {
     this.state = {
       collapsed: false
     }
-    this.onCheckedChange = this.onCheckedChange.bind(this);
+    this.onCheckedChange = this.onCheckedChange.bind(this)
   }
   // 父组件接收到子组件传递过来的值，进行下一步操作
   onCheckedChange(newState) {
@@ -33,14 +33,29 @@ class App extends Component {
           </Header>
           <Content style={{ margin: '32px' }}>
             <div style={{ minHeight: 460 }}>
-              {childRoutes.map((route, index) => (
-                <Route
-                  key={index}
-                  path={route.path}
-                  component={route.component}
-                  exact={route.exactly}
-                />
-              ))}
+              {childRoutes.map((childRoute) => {
+                if (childRoute.hasOwnProperty('child')) {
+                  return childRoute.child.map((route) => {
+                    return (
+                      <Route
+                        key={route.key}
+                        path={route.url}
+                        component={route.component}
+                        exact={route.exactly}
+                      />
+                    )
+                  })
+                } else {
+                  return (
+                    <Route
+                      key={childRoute.key}
+                      path={childRoute.url}
+                      component={childRoute.component}
+                      exact={childRoute.exactly}
+                    />
+                  )
+                }
+              })}
             </div>
           </Content>
         </Layout>
