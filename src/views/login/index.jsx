@@ -8,7 +8,7 @@ class BasicLogin extends React.Component {
     e.preventDefault()
     this.props.form.validateFields((errs, values) => {
       if (!errs && values) {
-        console.log('values', values)   
+        console.log('values', values)
         this.props.history.push('/dashboard')
       }
     })
@@ -22,6 +22,7 @@ class BasicLogin extends React.Component {
             <p className="login-form-title">系统登录</p>
             <FormItem>
               {getFieldDecorator('userName', {
+                initialValue: 'admin',
                 rules: [
                   { required: true, message: 'Please input your username!' }
                 ]
@@ -34,6 +35,7 @@ class BasicLogin extends React.Component {
             </FormItem>
             <FormItem>
               {getFieldDecorator('password', {
+                initialValue: 'admin',
                 rules: [
                   { required: true, message: 'please input your password!' }
                 ]

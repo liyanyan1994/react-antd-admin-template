@@ -2,27 +2,28 @@ import React from 'react'
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 // import asyncComponent from './asyncComponent'
 
-// const App = asyncComponent(() => import('../views/app/index'))
-// const Home = asyncComponent(() => import('../views/home/index'))
 // const Login = asyncComponent(() => import('../views/login/index'))
+// const Layout = asyncComponent(() => import('../views/app/index'))
 // const DashBoard = asyncComponent(() => import('../views/dashBoard/index'))
+// const Page2 = asyncComponent(() => import('../views/page2/index'))
+// const Card = asyncComponent(() => import('../components/card/index'))
+// const Table = asyncComponent(() => import('../components/table/index'))
 // const NoMatch = asyncComponent(() => import('../components/nomatch/index'))
 
-// import Cards from '../views/cards/index'
-// import Home from '../views/home/index'
-import Page2 from '../views/page2/index'
-import DashBoard from '../views/dashBoard/index'
-
-import Layout from '../views/app/index'
 import Login from '../views/login/index'
-import NoMatch from '../components/nomatch/index'
+import Layout from '../views/app/index'
+import DashBoard from '../views/dashBoard/index'
+import Page2 from '../views/page2/index'
 import Card from '../components/card/index'
 import Table from '../components/table/index'
+import NoMatch from '../components/nomatch/index'
+import BarChart from '../components/barchart/index'
+import LineChart from '../components/linechart/index'
 
 export const childRoutes = [
   {
     key: '0',
-    name: '首页',
+    name: 'Dashboard',
     icon: 'laptop',
     url: '/dashboard',
     component: DashBoard,
@@ -56,37 +57,35 @@ export const childRoutes = [
   },
   {
     key: 'sub3',
-    name: 'Team',
+    name: 'Chart',
     icon: 'team',
     child: [
       {
         key: '4',
-        name: 'team1',
-        url: '/team/team1',
-        component: Page2
+        name: 'line',
+        url: '/chart/line',
+        component: LineChart
       },
       {
         key: '5',
-        name: 'team2',
-        url: '/team/team2',
-        component: Page2
+        name: 'bar',
+        url: '/chart/bar',
+        component: BarChart
       }
     ]
   }
 ]
 
+// 面包屑导航栏url对应的name
 export const breadcrumbNameMap = {
-    '/dashboard': '首页',
-    
+    '/dashboard': 'Dashboard',
     '/components': 'Components',
     '/components/card': 'Card',
     '/components/table': 'Table',
-
     '/page2': 'Page2',
-    
-    '/team': 'Team',
-    '/team/team1': 'Team1',
-    '/team/team2': 'Team2',
+    '/chart': 'Chart',
+    '/chart/line': 'Line',
+    '/chart/bar': 'Bar',
   };
 
 

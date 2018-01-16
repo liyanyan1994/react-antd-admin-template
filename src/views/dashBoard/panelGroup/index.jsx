@@ -4,8 +4,8 @@ import { Row, Col, Card } from 'antd'
 import './index.css'
 
 class PanelGroup extends React.Component {
-  handleSetLineChartData(type,e) {
-    e.preventDefault();
+  handleSetLineChartData(type, e) {
+    e.preventDefault()
     this.props.handleSetLineChartData(type)
   }
   render() {
@@ -16,7 +16,7 @@ class PanelGroup extends React.Component {
             <div className="card-panel-icon-wrapper">
               <i
                 className="icon iconfont icon-people card-panel-icon"
-                onClick={this.handleSetLineChartData.bind(this,'newVisitis')}
+                onClick={this.handleSetLineChartData.bind(this, 'newVisitis')}
               />
             </div>
             <div className="card-panel-description">
@@ -30,7 +30,7 @@ class PanelGroup extends React.Component {
             <div className="card-panel-icon-wrapper">
               <i
                 className="icon iconfont icon-messagex card-panel-icon"
-                onClick={this.handleSetLineChartData.bind(this,'messages')}
+                onClick={this.handleSetLineChartData.bind(this, 'messages')}
               />
             </div>
             <div className="card-panel-description">
@@ -44,7 +44,7 @@ class PanelGroup extends React.Component {
             <div className="card-panel-icon-wrapper">
               <i
                 className="icon iconfont icon-qian card-panel-icon"
-                onClick={this.handleSetLineChartData.bind(this,'purchases')}
+                onClick={this.handleSetLineChartData.bind(this, 'purchases')}
               />
             </div>
             <div className="card-panel-description">
@@ -58,7 +58,7 @@ class PanelGroup extends React.Component {
             <div className="card-panel-icon-wrapper">
               <i
                 className="icon iconfont icon-gouwuche card-panel-icon"
-                onClick={this.handleSetLineChartData.bind(this,'shoppings')}
+                onClick={this.handleSetLineChartData.bind(this, 'shoppings')}
               />
             </div>
             <div className="card-panel-description">

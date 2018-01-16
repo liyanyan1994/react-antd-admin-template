@@ -5,6 +5,7 @@ import 'echarts/lib/chart/line';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 
+var myLineChart = null
 export default class LineChart extends React.Component {
     constructor(props) {
         super(props)
@@ -14,7 +15,7 @@ export default class LineChart extends React.Component {
         }
     }
     componentDidMount() {
-        var myLineChart = echarts.init(document.getElementById('chartId'))
+        myLineChart = echarts.init(document.getElementById('chartId'))
         myLineChart.setOption({
             xAxis: {
                 data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -82,6 +83,11 @@ export default class LineChart extends React.Component {
                 animationEasing: 'quadraticOut'
             }]
         })
+    }
+    componentWillUnmount(){
+        myLineChart.dispose()
+        myLineChart =  null
+        console.log(myLineChart)
     }
     render() {
         return <div id='chartId' style={{ width: '100%', height: '350px' }}></div>

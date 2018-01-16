@@ -20,7 +20,6 @@ class NavPath extends React.Component {
   }
   handleLoginOut = () => {
     console.log('loginout')
-    console.log(this.props.router)
     this.props.history.replace('/login')
   }
   render() {
@@ -46,7 +45,7 @@ class NavPath extends React.Component {
           <a
             rel="noopener noreferrer"
             target="_blank"
-            href="https://github.com/liyanyan1994/react-antd-admin-template"
+            href="https://github.com/liyanyan1994/react-antd-admin-simplateTemplate"
           >
             项目地址
           </a>
@@ -58,13 +57,13 @@ class NavPath extends React.Component {
       </Menu>
     )
     return (
-      <div style={{ marginLeft: 10, marginRight: 10 }}>
+      <div className='navpth-container'>
         <Icon
-          className="trigger"
+          className='trigger'
           type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
           onClick={this.toggle}
         />
-        <Breadcrumb style={{ margin: '24px 16px 0', display: 'inline-block' }}>
+        <Breadcrumb style={{ margin: '24px 16px 0',display: 'inline-block'}}>
           {extreaBreadcrumbItems}
         </Breadcrumb>
         <div className="drop-down">
