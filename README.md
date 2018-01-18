@@ -14,7 +14,7 @@
   <img width="900" src="http://www.liyanyan1994.xyz/images/dashbord.png">
 </p>
 
-## 项目说明
+##项目说明
     最近很闲,开始学习react，在github上找了好久没有发现使用最新的react-router V4.X以上的后台管理系统.
     主要是路由的嵌套，相对于V2.x的变化还是很大的。
     之前在公司都是使用的vue的全家桶,react也相对的类似,决定自己来写一个简单的后台系统模板。
@@ -25,7 +25,7 @@
 
     项目写得很基础适合刚入门，可以根据自己的需求进行改写,当然还有很可以进行改进的地方.
 
-## 技术文档
+##技术文档
 - [React](https://facebook.github.io/react/)
 - [React-router](https://reacttraining.com/react-router/web/example/basic)
 - [React-router中文文档](http://reacttraining.cn/web/example/basic)

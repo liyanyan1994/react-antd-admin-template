@@ -90,7 +90,8 @@ export default class LineChart extends React.Component {
         console.log(myLineChart)
     }
     render() {
-        return <div id='chartId' style={{ width: '100%', height: '350px' }}></div>
+        const {width='100%',height='350px'} = this.props
+        return <div id='chartId' style={{ width,height}}></div>
     }
 }
 

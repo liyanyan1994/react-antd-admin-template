@@ -1,7 +1,12 @@
 import React from 'react'
-import { Row } from 'antd'
+import { Row, Col, Card } from 'antd'
 import PanelGroup from './panelGroup/index'
 import LineChart from './lineChart/index'
+import RadarChart from './radarChart/index'
+import PieChart from './pieChart/index'
+import BarChart from './barChart/index'
+import TransactionTable from './transactionTable/index'
+
 const lineChartData = {
   newVisitis: {
     expectedData: [100, 120, 161, 134, 105, 160, 165],
@@ -46,6 +51,28 @@ export default class DashBoard extends React.Component {
           }}
         >
           <LineChart chartData={this.state.chartData} />
+        </Row>
+        <Row gutter={16} style={{ marginBottom: '20px' }}>
+          <Col span={8}>
+            <Card bordered={false}>
+                <RadarChart></RadarChart>
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card  bordered={false}>
+                <PieChart height="400px"></PieChart>
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card  bordered={false}>
+                <BarChart></BarChart>
+            </Card>
+          </Col>
+          <Col span={16} style={{marginTop:'20px'}}>
+          <Card>
+            <TransactionTable></TransactionTable>
+          </Card>
+          </Col>
         </Row>
       </div>
     )
