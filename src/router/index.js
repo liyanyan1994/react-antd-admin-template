@@ -13,6 +13,9 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Login from '../views/login/index'
 import Layout from '../views/app/index'
 import DashBoard from '../views/dashBoard/index'
+import DragTable from '../views/example/dragTable/index'
+import InlineEdit from '../views/example/inlineEdit/index'
+
 import Page2 from '../views/page2/index'
 import Card from '../components/card/index'
 import Table from '../components/table/index'
@@ -73,6 +76,25 @@ export const childRoutes = [
         component: BarChart
       }
     ]
+  },
+  {
+    key: 'sub4',
+    name: 'Example',
+    icon: 'team',
+    child: [
+      {
+        key: '4',
+        name: 'Drag Table',
+        url: '/example/drag-table',
+        component: DragTable
+      },
+      {
+        key: '5',
+        name: 'Inline Edit',
+        url: '/example/inline-edit',
+        component: InlineEdit
+      }
+    ]
   }
 ]
 
@@ -86,6 +108,9 @@ export const breadcrumbNameMap = {
     '/chart': 'Chart',
     '/chart/line': 'Line',
     '/chart/bar': 'Bar',
+    '/example':'Example',
+    '/example/drag-table': 'DragTable',
+    '/example/inline-edit': 'InlineEdit'
   };
 
 

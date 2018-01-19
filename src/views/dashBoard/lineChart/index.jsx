@@ -119,7 +119,7 @@ export default class LineChart extends React.Component {
     sidebarElm.removeEventListener('transitionend', this.__chartResizeHanlder)
   }
   render() {
-    const {width='100%',height='450px'} = this.props
+    const {width='100%',height='400px'} = this.props
     return <div id="chartId" style={{width,height}} />
   }
 }
