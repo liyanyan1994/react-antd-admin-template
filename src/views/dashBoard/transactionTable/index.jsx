@@ -1,51 +1,53 @@
 import React from 'react'
-import { Table, Icon } from 'antd'
+import { Table,Button } from 'antd'
 
 const { Column} = Table
 
 const data = [
   {
     key: '1',
-    firstName: 'John',
     lastName: 'Brown',
     age: 32,
-    address: 'New York No. 1 Lake Park'
+    address: 'New York No. 1 Lake Park',
+    status: 0
   },
   {
     key: '2',
-    firstName: 'Jim',
     lastName: 'Green',
     age: 42,
-    address: 'London No. 1 Lake Park'
+    address: 'London No. 1 Lake Park',
+    status: 1
   },
   {
     key: '3',
-    firstName: 'Joe',
     lastName: 'Black',
     age: 32,
-    address: 'Sidney No. 1 Lake Park'
+    address: 'Sidney No. 1 Lake Park',
+    status: 1
+  },
+  {
+    key: '4',
+    lastName: 'Helen',
+    age: 18,
+    address: 'Units States No. 1 Park',
+    status: 0
   }
 ]
 export default class Tables extends React.Component {
   render() {
     return (
-      <Table dataSource={data}>
-        <Column title="Last Name" dataIndex="lastName" key="lastName" />
+      <Table dataSource={data} pagination={false}>
+        <Column title="Name" dataIndex="lastName" key="lastName" />
         <Column title="Age" dataIndex="age" key="age" />
         <Column title="Address" dataIndex="address" key="address" />
         <Column
-          title="Action"
-          key="action"
-          render={(text, record) => (
-            <span>
-              <a href="1">Action 一 {record.name}</a>
-              <span className="ant-divider" />
-              <a href="2">Delete</a>
-              <span className="ant-divider" />
-              <a href="3" className="ant-dropdown-link">
-                More actions <Icon type="down" />
-              </a>
-            </span>
+          title="Status"
+          key="status"
+          dataIndex="status"
+          render={(text) => (
+            <Button type={text? 'primary':'danger'} ghost size='small'>
+             {text ? 'Success':'Pending'}
+            </Button>
           )}
         />
       </Table>

@@ -122,7 +122,6 @@ export default class LineChart extends React.Component {
                 data: ['北京', '上海', '广州'],
                 itemGap: 20,
                 textStyle: {
-                    color: '#fff',
                     fontSize: 14
                 },
                 selectedMode: 'single'

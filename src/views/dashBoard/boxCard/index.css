@@ -1,0 +1,10 @@
+.progress-item{
+    padding: 5px 0;
+}
+.card-img{
+    transition: all 0.2s linear;
+}
+.card-img:hover{
+    transform: scale(1.1, 1.1);
+    filter: contrast(120%);
+}
