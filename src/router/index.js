@@ -83,13 +83,13 @@ export const childRoutes = [
     icon: 'team',
     child: [
       {
-        key: '4',
+        key: '6',
         name: 'Drag Table',
         url: '/example/drag-table',
         component: DragTable
       },
       {
-        key: '5',
+        key: '7',
         name: 'Inline Edit',
         url: '/example/inline-edit',
         component: InlineEdit

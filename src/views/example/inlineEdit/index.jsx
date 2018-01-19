@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Input, Popconfirm,Card } from 'antd'
+import { Table, Input, Popconfirm,Card,Button} from 'antd'
 
 const data = []
 for (let i = 0; i < 100; i++) {
@@ -56,16 +56,16 @@ export default class EditableTable extends React.Component {
             <div className="editable-row-operations">
               {editable ? (
                 <span>
-                  <a onClick={() => this.save(record.key)}>Save</a>
+                  <a onClick={() => this.save(record.key)} style={{marginRight:'10px'}}><Button type='primary'  size='small'>Save</Button></a>
                   <Popconfirm
                     title="Sure to cancel?"
                     onConfirm={() => this.cancel(record.key)}
                   >
-                    <a>Cancel</a>
+                    <a><Button type='dashed'  size='small' >Cancel</Button></a>
                   </Popconfirm>
                 </span>
               ) : (
-                <a onClick={() => this.edit(record.key)}>Edit</a>
+                <a onClick={() => this.edit(record.key)}><Button size='small'>Edit</Button></a>
               )}
             </div>
           )
