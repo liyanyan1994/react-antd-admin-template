@@ -1,0 +1,12 @@
+.filter-container{
+    margin-bottom: 20px;
+}
+.filter-items{
+    margin-right: 10px!important;
+}
+.filter-input{
+    width: 200px!important;
+}
+.filter-select{
+    width: 150px!important;
+}
