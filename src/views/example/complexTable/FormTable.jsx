@@ -1,11 +1,12 @@
 import React from 'react'
-import { Table, Icon,Button } from 'antd'
+import { Table, Icon, Button, Popconfirm } from 'antd'
 
 export default class FormTable extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+  //   constructor(props) {
+  //     super(props)
+  //   }
   render() {
+    const { dataSource, editClick, deleteClick } = this.props
     const columns = [
       {
         title: '姓名',
@@ -18,7 +19,7 @@ export default class FormTable extends React.Component {
         dataIndex: 'sex',
         key: 'sex',
         width: 70,
-        render: (text) => (<span>{+text? '女': '男'}</span>)
+        render: text => <span>{+text ? '女' : '男'}</span>
       },
       {
         title: '年龄',
@@ -36,28 +37,29 @@ export default class FormTable extends React.Component {
       {
         title: '操作',
         dataIndex: 'Opera',
-        key:'opera',
+        key: 'opera',
         width: 100,
         render: (text, record) => (
           <div className="opera">
-            <Button type="dashed" style={{marginRight:5}}>
-              <Icon type="edit"></Icon>修改
+            <Button
+              type="dashed"
+              onClick={() => editClick(record.key)}
+              style={{ marginRight: 5 }}
+            >
+              <Icon type="edit" />修改
             </Button>
-            <Button>
-              <Icon type="minus-square-o" />删除
-            </Button>
+            <Popconfirm
+              title="确定要删除吗?"
+              onConfirm={() => deleteClick(record.key)}
+            >
+              <Button>
+                <Icon type="minus-square-o" />删除
+              </Button>
+            </Popconfirm>
           </div>
         )
       }
     ]
-    const {dataSource} = this.props
-    return (
-      <Table
-        columns={columns}
-        dataSource={dataSource}
-        bordered={true}
-        rowKey="formTable"
-      />
-    )
+    return <Table columns={columns} dataSource={dataSource} bordered={true} />
   }
 }
