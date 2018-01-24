@@ -96,6 +96,10 @@ Router下只能有一个router 用div包裹所有的route就可以了
     参照antd官网例子https://ant.design/components/breadcrumb-cn/
 
 10.完整的table表格筛选数据
- mockjs模拟数据 axios请求
+ mockjs模拟json数据 axios请求
  npm install axios --save
  npm install mockjs --save
+
+11.Tab
+
+12.Mock 模拟动态数据

@@ -1,29 +1,11 @@
 import './index.css'
 import React from 'react'
-import axios from 'axios'
-import Mock from 'mockjs'
-
 import FormTable from './FormTable'
 import FormEdit from './FormEdit'
-import data from './mock/data.json'
 import { Select, Button, Input } from 'antd'
+import { requestList } from '../../../api/userinfo'
 const Option = Select.Option
-// 原始数据 可改成API请求数据
-// const orignDataSource = [
-//   { key: '0', userName: 'doudou', sex: '1', age: 16, address: '上海' },
-//   { key: '1', userName: 'doudou', sex: '1', age: 16, address: '上海' },
-//   { key: '2', userName: '萌新', sex: '0', age: 26, address: '广州' },
-//   { key: '3', userName: '萌新', sex: '0', age: 26, address: '广州' },
-//   { key: '4', userName: '痘痘', sex: '1', age: 18, address: '深圳' },
-//   { key: '5', userName: '痘痘', sex: '1', age: 18, address: '深圳' },
-//   { key: '6', userName: '阿狸', sex: '0', age: 7, address: '杭州' },
-//   { key: '7', userName: '狸', sex: '0', age: 27, address: '杭州' },
-//   { key: '8', userName: '阿狸', sex: '0', age: 70, address: '杭州' },
-//   { key: '9', userName: '狸', sex: '0', age: 17, address: '杭州' },
-//   { key: '10', userName: '阿狸', sex: '0', age: 12, address: '杭州' }
-// ]
 
-Mock.mock('/data', data)
 var uuId = 100
 
 //替换数组的对应项
@@ -53,15 +35,13 @@ export default class ComplexTable extends React.Component {
     }
   }
   componentDidMount() {
-    axios
-      .get('/data')
-      .then(res => {
-        console.log(res)
-        this.setState({ dataSource: res.data,orignDataSource: res.data, loading: false })
+    requestList().then(res => {
+      this.setState({
+        dataSource: res.data.items,
+        orignDataSource: res.data.items,
+        loading: false
       })
-      .catch(err => {
-        console.log(err)
-      })
+    })
   }
   // 筛选sex
   onChangeSex = value => {

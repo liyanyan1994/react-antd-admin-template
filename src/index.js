@@ -4,6 +4,9 @@ import './index.css'
 import Routers from './router/index'
 import 'antd/dist/antd.css';
 
+// mock数据
+import './mock/index'
+
 import registerServiceWorker from './registerServiceWorker'
 ReactDOM.render(
   <Routers/>,
