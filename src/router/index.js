@@ -16,6 +16,7 @@ import DashBoard from '../views/dashBoard/index'
 import DragTable from '../views/example/dragTable/index'
 import InlineEdit from '../views/example/inlineEdit/index'
 import ComplexTable from '../views/example/complexTable/index'
+import Tab from '../views/example/tab/index'
 
 import Page2 from '../views/page2/index'
 import Card from '../components/card/index'
@@ -100,6 +101,12 @@ export const childRoutes = [
         name: 'Complex Table',
         url: '/example/complex-table',
         component: ComplexTable
+      },
+      {
+        key: '9',
+        name: 'Tab',
+        url: '/example/tab',
+        component: Tab
       }
     ]
   }
@@ -118,7 +125,8 @@ export const breadcrumbNameMap = {
     '/example':'Example',
     '/example/drag-table': 'DragTable',
     '/example/inline-edit': 'InlineEdit',
-    '/example/complex-table': 'ComplexTable'
+    '/example/complex-table': 'ComplexTable',
+    '/example/tab': 'Tab'
   };
 
 
