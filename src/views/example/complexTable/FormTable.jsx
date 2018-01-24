@@ -6,7 +6,7 @@ export default class FormTable extends React.Component {
   //     super(props)
   //   }
   render() {
-    const { dataSource, editClick, deleteClick } = this.props
+    const { dataSource, editClick, deleteClick,loading} = this.props
     const columns = [
       {
         title: '姓名',
@@ -42,7 +42,8 @@ export default class FormTable extends React.Component {
         render: (text, record) => (
           <div className="opera">
             <Button
-              type="dashed"
+              ghost
+              type="primary"
               onClick={() => editClick(record.key)}
               style={{ marginRight: 5 }}
             >
@@ -52,7 +53,7 @@ export default class FormTable extends React.Component {
               title="确定要删除吗?"
               onConfirm={() => deleteClick(record.key)}
             >
-              <Button>
+              <Button type="danger">
                 <Icon type="minus-square-o" />删除
               </Button>
             </Popconfirm>
@@ -60,6 +61,6 @@ export default class FormTable extends React.Component {
         )
       }
     ]
-    return <Table columns={columns} dataSource={dataSource} bordered={true} />
+    return <Table columns={columns} dataSource={dataSource} bordered={true} loading={loading}/>
   }
 }

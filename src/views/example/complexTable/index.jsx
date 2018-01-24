@@ -1,28 +1,41 @@
 import './index.css'
 import React from 'react'
+import axios from 'axios'
+import Mock from 'mockjs'
+
 import FormTable from './FormTable'
 import FormEdit from './FormEdit'
+import data from './mock/data.json'
 import { Select, Button, Input } from 'antd'
 const Option = Select.Option
 // 原始数据 可改成API请求数据
-const orignDataSource = [
-  { key: '0', userName: 'doudou', sex: '1', age: 16, address: '上海' },
-  { key: '1', userName: '萌新', sex: '0', age: 26, address: '广州' },
-  { key: '2', userName: '痘痘', sex: '1', age: 18, address: '深圳' },
-  { key: '3', userName: '阿狸', sex: '0', age: 7, address: '杭州' }
-]
+// const orignDataSource = [
+//   { key: '0', userName: 'doudou', sex: '1', age: 16, address: '上海' },
+//   { key: '1', userName: 'doudou', sex: '1', age: 16, address: '上海' },
+//   { key: '2', userName: '萌新', sex: '0', age: 26, address: '广州' },
+//   { key: '3', userName: '萌新', sex: '0', age: 26, address: '广州' },
+//   { key: '4', userName: '痘痘', sex: '1', age: 18, address: '深圳' },
+//   { key: '5', userName: '痘痘', sex: '1', age: 18, address: '深圳' },
+//   { key: '6', userName: '阿狸', sex: '0', age: 7, address: '杭州' },
+//   { key: '7', userName: '狸', sex: '0', age: 27, address: '杭州' },
+//   { key: '8', userName: '阿狸', sex: '0', age: 70, address: '杭州' },
+//   { key: '9', userName: '狸', sex: '0', age: 17, address: '杭州' },
+//   { key: '10', userName: '阿狸', sex: '0', age: 12, address: '杭州' }
+// ]
 
-var uuId = 100;
+Mock.mock('/data', data)
+var uuId = 100
 
 //替换数组的对应项
-function replace(arr, item, place){ //arr 数组,item 数组其中一项的key值, place 替换项
-    arr.map(function (ar) {
-        if(ar.key === item){
-            arr.splice(arr.indexOf(ar),1,place)
-        }
-        return null
-    });
-    return arr;
+function replace(arr, item, place) {
+  //arr 数组,item 数组其中一项的key值, place 替换项
+  arr.map(function(ar) {
+    if (ar.key === item) {
+      arr.splice(arr.indexOf(ar), 1, place)
+    }
+    return null
+  })
+  return arr
 }
 
 export default class ComplexTable extends React.Component {
@@ -31,11 +44,24 @@ export default class ComplexTable extends React.Component {
     this.state = {
       userName: undefined,
       sex: undefined,
-      dataSource: orignDataSource,
+      dataSource: [],
+      orignDataSource: [], //多存一条，过滤的时候使用
       visible: false, //dialoge是否显示
       tableRowKey: 0, // 单行key
       isUpdate: false, // 是否修改
+      loading: true // table显示loading
     }
+  }
+  componentDidMount() {
+    axios
+      .get('/data')
+      .then(res => {
+        console.log(res)
+        this.setState({ dataSource: res.data,orignDataSource: res.data, loading: false })
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
   // 筛选sex
   onChangeSex = value => {
@@ -48,7 +74,7 @@ export default class ComplexTable extends React.Component {
   }
   //   新建模态框
   onHandleCreateModal = () => {
-    this.setState({ visible: true,isUpdate:false})
+    this.setState({ visible: true, isUpdate: false })
     const form = this.form
     form.resetFields()
   }
@@ -67,47 +93,53 @@ export default class ComplexTable extends React.Component {
     const form = this.form
     const { dataSource } = this.state
     form.validateFields((err, values) => {
-      if (err) {return}
+      if (err) {
+        return
+      }
       const createNewSource = dataSource.slice()
-      orignDataSource.push({key:uuId++,...values})  // 和原始数据同步
-      createNewSource.push({key:uuId++,...values})
+      //   orignDataSource.push({key:uuId++,...values})  // 和原始数据同步
+      createNewSource.push({ key: uuId++, ...values })
       this.setState({ dataSource: createNewSource, visible: false })
     })
   }
-//   修改某一行的信息
+  //   修改某一行的信息
   handleUpdate = () => {
-      console.log('handleUpdate')
-      const form = this.form
-      const {dataSource,tableRowKey} = this.state
-      form.validateFields((err,values) => {
-        if(err){return;}
-        values.key = tableRowKey
-        form.resetFields()
-        this.setState({visible:false,dataSource: replace(dataSource,tableRowKey,values)})
+    console.log('handleUpdate')
+    const form = this.form
+    const { dataSource, tableRowKey } = this.state
+    form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      values.key = tableRowKey
+      form.resetFields()
+      this.setState({
+        visible: false,
+        dataSource: replace(dataSource, tableRowKey, values)
       })
+    })
   }
   // 点击某一行进行编辑
-  editClick = (key) => {
-    const {dataSource} = this.state
+  editClick = key => {
+    const { dataSource } = this.state
     const form = this.form
     const filterObj = dataSource.filter(item => item.key === key)[0]
-    form.setFieldsValue({...filterObj})
+    form.setFieldsValue({ ...filterObj })
     this.setState({
-        visible: true,
-        tableRowKey: key,
-        isUpdate: true,
-    });
+      visible: true,
+      tableRowKey: key,
+      isUpdate: true
+    })
   }
-//  点击删除某一行
-  deleteClick = (key) => {
-    console.log(key)
+  //  点击删除某一行
+  deleteClick = key => {
     const dataSource = [...this.state.dataSource]
-    this.setState({dataSource: dataSource.filter(item => item.key !== key)})
+    this.setState({ dataSource: dataSource.filter(item => item.key !== key) })
   }
 
   // 按照条件筛选
   onFilterSearch = () => {
-    const { userName, sex } = this.state
+    const { userName, sex, orignDataSource } = this.state
     let filterArr = orignDataSource.filter(item => {
       if (userName && item.userName.indexOf(userName) < 0) return false
       if (sex && item.sex !== sex) return false
@@ -116,7 +148,7 @@ export default class ComplexTable extends React.Component {
     this.setState({ dataSource: filterArr })
   }
   render() {
-    const { userName, dataSource, sex, visible,isUpdate} = this.state
+    const { userName, dataSource, sex, visible, isUpdate, loading } = this.state
     return (
       <div className="table-container">
         <div className="filter-container">
@@ -155,7 +187,12 @@ export default class ComplexTable extends React.Component {
             Export
           </Button>
         </div>
-        <FormTable dataSource={dataSource} editClick={this.editClick} deleteClick= {this.deleteClick}/>
+        <FormTable
+          dataSource={dataSource}
+          editClick={this.editClick}
+          deleteClick={this.deleteClick}
+          loading={loading}
+        />
 
         {isUpdate ? (
           <FormEdit
@@ -165,13 +202,15 @@ export default class ComplexTable extends React.Component {
             onCancel={this.handleCancel}
             onCreate={this.handleUpdate}
           />
-        ): ( <FormEdit
+        ) : (
+          <FormEdit
             ref={this.saveFormRef}
             visible={visible}
             title="Create"
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}
-          />)}
+          />
+        )}
       </div>
     )
   }
