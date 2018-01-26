@@ -2,11 +2,11 @@ import './index.css'
 import React from 'react'
 import FormTable from './FormTable'
 import FormEdit from './FormEdit'
-import { Select, Button, Input } from 'antd'
+import { Select, Button, Input, notification, message } from 'antd'
 import { requestList } from '../../../api/userinfo'
 const Option = Select.Option
 
-var uuId = 100
+var uuId = 1000
 
 //替换数组的对应项
 function replace(arr, item, place) {
@@ -24,34 +24,45 @@ export default class ComplexTable extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userName: undefined,
-      sex: undefined,
       dataSource: [],
-      orignDataSource: [], //多存一条，过滤的时候使用
       visible: false, //dialoge是否显示
       tableRowKey: 0, // 单行key
       isUpdate: false, // 是否修改
-      loading: true // table显示loading
+      loading: true, // table显示loading
+      listQuery: {
+        limit: 10,
+        current: 1,
+        total: 10,
+        userName: undefined,
+        sex: undefined
+      }
     }
   }
   componentDidMount() {
-    requestList().then(res => {
+    this.fetchData()
+  }
+  //   请求mock数据得到list
+  fetchData = () => {
+    this.setState({ loading: true })
+    requestList(this.state.listQuery).then(res => {
+      const listQuery = { ...this.state.listQuery }
+      listQuery.total = res.data.total
       this.setState({
         dataSource: res.data.items,
-        orignDataSource: res.data.items,
-        loading: false
+        loading: false,
+        listQuery: listQuery
       })
     })
   }
-  // 筛选sex
-  onChangeSex = value => {
-    this.setState({ sex: value })
+  //   table翻页
+  tableChange = pagination => {
+    const listQuery = { ...this.state.listQuery }
+    listQuery.current = pagination.current // 指定当前页数
+    this.setState({ listQuery: listQuery }, function() {
+      this.fetchData()
+    }) // setState()为异步,需要采用匿名函数进行回调
   }
-  // 筛选userName
-  onChangeUserName = e => {
-    const value = e.target.value
-    this.setState({ userName: value })
-  }
+
   //   新建模态框
   onHandleCreateModal = () => {
     this.setState({ visible: true, isUpdate: false })
@@ -64,7 +75,6 @@ export default class ComplexTable extends React.Component {
   }
   //接受新建表单数据
   saveFormRef = form => {
-    console.log('saveFormRef')
     this.form = form
   }
   //   提交表单添加一个新的form信息
@@ -77,29 +87,23 @@ export default class ComplexTable extends React.Component {
         return
       }
       const createNewSource = dataSource.slice()
-      //   orignDataSource.push({key:uuId++,...values})  // 和原始数据同步
-      createNewSource.push({ key: uuId++, ...values })
-      this.setState({ dataSource: createNewSource, visible: false })
+      createNewSource.unshift({ key: uuId++, ...values })
+      this.setState(
+        { dataSource: createNewSource, visible: false },
+        function() {
+          this.notification('创建成功')
+        }
+      )
     })
   }
-  //   修改某一行的信息
-  handleUpdate = () => {
-    console.log('handleUpdate')
-    const form = this.form
-    const { dataSource, tableRowKey } = this.state
-    form.validateFields((err, values) => {
-      if (err) {
-        return
-      }
-      values.key = tableRowKey
-      form.resetFields()
-      this.setState({
-        visible: false,
-        dataSource: replace(dataSource, tableRowKey, values)
-      })
+  // 右侧通知信息
+  notification = describe => {
+    notification['success']({
+      message: '成功',
+      description: describe
     })
   }
-  // 点击某一行进行编辑
+  // 某一行进行编辑
   editClick = key => {
     const { dataSource } = this.state
     const form = this.form
@@ -111,24 +115,66 @@ export default class ComplexTable extends React.Component {
       isUpdate: true
     })
   }
-  //  点击删除某一行
+
+  //   提交修改信息
+  handleUpdate = () => {
+    console.log('handleUpdate')
+    const form = this.form
+    const { dataSource, tableRowKey } = this.state
+    form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      values.key = tableRowKey
+      form.resetFields()
+      this.setState(
+        {
+          visible: false,
+          dataSource: replace(dataSource, tableRowKey, values)
+        },
+        function() {
+          message.success('update success')
+        }
+      )
+    })
+  }
+
+  //  删除某一行
   deleteClick = key => {
     const dataSource = [...this.state.dataSource]
-    this.setState({ dataSource: dataSource.filter(item => item.key !== key) })
+    this.setState(
+      { dataSource: dataSource.filter(item => item.key !== key) },
+      function() {
+        message.success('删除成功')
+      }
+    )
+  }
+
+  // sex同步select
+  onChangeSex = value => {
+    const listQuery = { ...this.state.listQuery }
+    listQuery.sex = value // 指定current
+    this.setState({ listQuery: listQuery })
+  }
+  // userName同步input
+  onChangeUserName = e => {
+    const listQuery = { ...this.state.listQuery }
+    listQuery.userName = e.target.value
+    this.setState({ listQuery: listQuery })
   }
 
   // 按照条件筛选
   onFilterSearch = () => {
-    const { userName, sex, orignDataSource } = this.state
-    let filterArr = orignDataSource.filter(item => {
-      if (userName && item.userName.indexOf(userName) < 0) return false
-      if (sex && item.sex !== sex) return false
-      return true
-    })
-    this.setState({ dataSource: filterArr })
+    const { listQuery } = this.state
+    listQuery.current = 1
+    this.setState({ listQuery: listQuery }, function() {
+      this.fetchData()
+    }) //匿名函数进行回调
   }
   render() {
-    const { userName, dataSource, sex, visible, isUpdate, loading } = this.state
+    const { dataSource, visible, isUpdate, loading, listQuery } = this.state
+    const userName = listQuery.userName
+    const sex = listQuery.sex
     return (
       <div className="table-container">
         <div className="filter-container">
@@ -171,7 +217,9 @@ export default class ComplexTable extends React.Component {
           dataSource={dataSource}
           editClick={this.editClick}
           deleteClick={this.deleteClick}
+          tableChange={this.tableChange}
           loading={loading}
+          pagination={listQuery}
         />
 
         {isUpdate ? (

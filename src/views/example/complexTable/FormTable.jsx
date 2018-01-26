@@ -6,7 +6,7 @@ export default class FormTable extends React.Component {
   //     super(props)
   //   }
   render() {
-    const { dataSource, editClick, deleteClick,loading} = this.props
+    const { dataSource, editClick, deleteClick,tableChange,loading,pagination} = this.props
     const columns = [
       {
         title: '姓名',
@@ -61,6 +61,6 @@ export default class FormTable extends React.Component {
         )
       }
     ]
-    return <Table columns={columns} dataSource={dataSource} bordered={true} loading={loading}/>
+    return <Table columns={columns} dataSource={dataSource} bordered={true} loading={loading} onChange={tableChange} pagination = {pagination}/>
   }
 }

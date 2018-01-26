@@ -1,8 +1,9 @@
 import request from './request'
 
-export function requestList() {
+export function requestList(query) {
     return request({
         url:'/complext/list',
-        methods: 'get'
+        methods: 'get',
+        params: query
     })
 }
