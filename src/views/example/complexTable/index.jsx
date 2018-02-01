@@ -58,7 +58,7 @@ export default class ComplexTable extends React.Component {
   tableChange = pagination => {
     const listQuery = { ...this.state.listQuery }
     listQuery.current = pagination.current // 指定当前页数
-    this.setState({ listQuery: listQuery }, function() {
+    this.setState({ listQuery: listQuery }, () => {
       this.fetchData()
     }) // setState()为异步,需要采用匿名函数进行回调
   }
@@ -143,10 +143,7 @@ export default class ComplexTable extends React.Component {
   deleteClick = key => {
     const dataSource = [...this.state.dataSource]
     this.setState(
-      { dataSource: dataSource.filter(item => item.key !== key) },
-      function() {
-        message.success('删除成功')
-      }
+      { dataSource: dataSource.filter(item => item.key !== key) },() => {message.success('删除成功')}
     )
   }
 
@@ -167,7 +164,7 @@ export default class ComplexTable extends React.Component {
   onFilterSearch = () => {
     const { listQuery } = this.state
     listQuery.current = 1
-    this.setState({ listQuery: listQuery }, function() {
+    this.setState({ listQuery: listQuery }, () =>{
       this.fetchData()
     }) //匿名函数进行回调
   }

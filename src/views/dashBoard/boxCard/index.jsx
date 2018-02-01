@@ -6,7 +6,7 @@ export default class BoxCard extends React.Component {
     return (
       <Card bordered={false}>
         <div>
-            <img className='card-img' alt="example" width="100%" src="https://pic2.zhimg.com/80/v2-470c39038b351a82b647630497355e46_r.jpg" />
+            <img className='card-img' alt="example" width="100%" src="http://www.liyanyan1994.xyz/images/01.jpg" />
         </div>
         <div className='progress-item'>
             <span>React</span>

@@ -103,3 +103,9 @@ Router下只能有一个router 用div包裹所有的route就可以了
 11.Tab
 
 12.Mock 模拟动态数据
+
+13 安装moment依赖
+npm install moment --save
+
+npm install react-quill --save
+

@@ -17,6 +17,8 @@ import DragTable from '../views/example/dragTable/index'
 import InlineEdit from '../views/example/inlineEdit/index'
 import ComplexTable from '../views/example/complexTable/index'
 import Tab from '../views/example/tab/index'
+import CreateForm from '../views/form/create'
+import EditForm from '../views/form/edit'
 
 import Page2 from '../views/page2/index'
 import Card from '../components/card/index'
@@ -67,15 +69,21 @@ export const childRoutes = [
     child: [
       {
         key: '4',
-        name: 'line',
+        name: 'Line Chart',
         url: '/chart/line',
         component: LineChart
       },
       {
         key: '5',
-        name: 'bar',
+        name: 'Bar Chart',
         url: '/chart/bar',
         component: BarChart
+      },
+      {
+        key: '10',
+        name: 'Mix Chart',
+        url: '/chart/mix',
+        component: Page2
       }
     ]
   },
@@ -109,7 +117,26 @@ export const childRoutes = [
         component: Tab
       }
     ]
-  }
+  },
+  {
+    key: 'sub5',
+    name: 'Form',
+    icon: 'form',
+    child: [
+      {
+        key: '11',
+        name: 'Create Form',
+        url: '/form/create',
+        component: CreateForm
+      },
+      {
+        key: '12',
+        name: 'Edit Form',
+        url: '/form/edit',
+        component: EditForm
+      }
+    ]
+  },
 ]
 
 // 面包屑导航栏url对应的name
@@ -120,13 +147,17 @@ export const breadcrumbNameMap = {
     '/components/table': 'Table',
     '/page2': 'Page2',
     '/chart': 'Chart',
-    '/chart/line': 'Line',
-    '/chart/bar': 'Bar',
+    '/chart/line': 'Line Chart',
+    '/chart/bar': 'Bar Chart',
+    '/chart/mix': 'Mix Chart',
     '/example':'Example',
     '/example/drag-table': 'DragTable',
     '/example/inline-edit': 'InlineEdit',
     '/example/complex-table': 'ComplexTable',
-    '/example/tab': 'Tab'
+    '/example/tab': 'Tab',
+    '/form': 'Form',
+    '/form/create': 'Create Form',
+    '/form/edit': 'Edit Form',
   };
 
 
