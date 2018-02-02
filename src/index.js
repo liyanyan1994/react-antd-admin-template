@@ -1,22 +1,30 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
 import Routers from './router/index'
-import 'antd/dist/antd.css';
+
+import store from './store'
+import { Provider } from 'react-redux'
+
+import './index.css'
+import 'antd/dist/antd.css'
 
 // mock数据
 import './mock/index'
 
 import registerServiceWorker from './registerServiceWorker'
 ReactDOM.render(
-  <Routers/>,
+  <Provider store={store}>
+    <Routers />
+  </Provider>,
   document.getElementById('root')
 )
 
 if (module.hot) {
   module.hot.accept('./views/app/index', () => {
     ReactDOM.render(
-      <Routers/>,
+      <Provider store={store}>
+        <Routers />
+      </Provider>,
       document.getElementById('root')
     )
   })

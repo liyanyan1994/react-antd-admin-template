@@ -1,0 +1,20 @@
+/* 设置todo input的长度 */
+.form-input{
+    width: 80%;
+}
+.form-input .ant-form-item-control-wrapper{
+    width: 100%;
+}
+
+/* 整个todo-list */
+.todo-list{
+    list-style: none;
+    margin:0;
+    padding: 0;
+    min-height: 100px;
+}
+/* 设置todo-list下面的每一行 */
+.todo-item{
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}

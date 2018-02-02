@@ -7,6 +7,7 @@ import PieChart from './pieChart/index'
 import BarChart from './barChart/index'
 import TransactionTable from './transactionTable/index'
 import BoxCard from './boxCard/index'
+import Todo from '../../components/todolist/index'
 
 const lineChartData = {
   newVisitis: {
@@ -56,26 +57,31 @@ export default class DashBoard extends React.Component {
         <Row gutter={16} style={{ marginBottom: '20px' }}>
           <Col span={8}>
             <Card bordered={false}>
-                <RadarChart></RadarChart>
+              <RadarChart />
             </Card>
           </Col>
           <Col span={8}>
-            <Card  bordered={false}>
-                <PieChart height="400px"></PieChart>
+            <Card bordered={false}>
+              <PieChart height="400px" />
             </Card>
           </Col>
           <Col span={8}>
-            <Card  bordered={false}>
-                <BarChart></BarChart>
+            <Card bordered={false}>
+              <BarChart />
             </Card>
           </Col>
-          <Col span={16} style={{marginTop:'20px'}}>
-          <Card bordered={false}>
-            <TransactionTable></TransactionTable>
-          </Card>
+        </Row>
+        <Row gutter={16} style={{ marginTop: '20px' }}>
+          <Col span={8}>
+            <Card bordered={false}>
+              <TransactionTable />
+            </Card>
           </Col>
-          <Col span={8} style={{marginTop:'20px'}}>
-            <BoxCard></BoxCard>
+          <Col span={8}>
+            <Todo />
+          </Col>
+          <Col span={8}>
+            <BoxCard />
           </Col>
         </Row>
       </div>

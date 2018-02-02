@@ -109,3 +109,9 @@ npm install moment --save
 
 npm install react-quill --save
 
+安装redux 实现todo应用
+npm install redux --save
+npm install react-redux --save
+
+
+import PropTypes from 'prop-types'不适用 import {PropTypes} from 'react'
